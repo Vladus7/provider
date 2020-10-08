@@ -1,0 +1,76 @@
+body{margin: 0;
+padding: 0;}
+
+.item{
+    width: 80%;
+    height: 170px;
+    background-color: #E5F0FF;
+
+    display: flex;
+    align-items: center;
+    border-radius: 10px/20px;
+    margin-top: 10px;
+}
+
+.item_container{
+    margin-left: 30px;
+}
+
+.item_name{
+    font-size: 35px;
+    color: #0ca7f9 ;
+}
+
+.item_description{
+    font-size: 25px;
+    color: #0ca7f9 ;
+}
+
+.list-Tile a {
+    /*color: #FFFFFF;*/
+    display: flex;
+    justify-content: center;
+    text-decoration: none;
+}
+
+.header{
+    height: 10%;
+    background-color: #0ca7f9;
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    color: #ffffff;
+    font-size: 45px;
+    font-family: 'Noto Sans JP', sans-serif;
+}
+
+.language{
+    display: flex;
+    flex-direction: row;
+    width: 10%;
+    font-size: 25px;
+}
+
+.user{
+    display: flex;
+    flex-direction: row;
+    width: 270px;
+    justify-content: space-around;
+    align-items: center;
+}
+
+
+.information{
+    margin-top: 10px;
+    height: 10%;
+    background-color: #0ca7f9;
+    display: flex;
+    align-items: center;
+    color: #ffffff;
+    justify-content: space-around;
+}
+
+.list-Tile{
+    min-height: 80%;
+
+}
