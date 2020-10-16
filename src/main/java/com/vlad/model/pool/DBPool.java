@@ -1,5 +1,6 @@
 package com.vlad.model.pool;
 
+import com.vlad.model.AppException;
 import com.vlad.model.pool.Pool;
 
 import java.sql.Connection;
@@ -10,20 +11,20 @@ import java.util.List;
 
 public class DBPool implements Pool {
     private String url;
-    private List<Connection> connections =  new ArrayList<>();
+    private List<Connection> connections = new ArrayList<>();
     private List<Connection> usedConnections = new ArrayList<>();
 
-    public DBPool(String url, int maxConnections){
+    public DBPool(String url, int maxConnections) {
         this.url = url;
         try {
-           Class.forName("com.mysql.cj.jdbc.Driver");
+            Class.forName("com.mysql.cj.jdbc.Driver");
             for (int i = 0; i < maxConnections; i++) {
                 connections.add(createConnection());
             }
         }
-        //catch (SQLException e){
-       catch (ClassNotFoundException e){
-          System.out.println(e); }
+        catch (ClassNotFoundException e) {
+            System.out.println(e);
+        }
     }
 
     private Connection createConnection() {
@@ -41,7 +42,7 @@ public class DBPool implements Pool {
         if (connections.size() == 0) {
             newConn = getConnection();
         } else {
-            newConn = connections.get(connections.size()-1);
+            newConn = connections.get(connections.size() - 1);
             connections.remove(newConn);
         }
         usedConnections.add(newConn);

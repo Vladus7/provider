@@ -21,10 +21,14 @@ public class Service {
         this.description = description;
     }
 
-    public Service createService(String name, String image, String description , ServiceDAO serviceDAO){
-        Service service = new Service(name,image,description);
+    public static Service createService(String name, String image, String description, ServiceDAO serviceDAO) {
+        Service service = new Service(name, image, description);
         serviceDAO.createService(service);
         return service;
+    }
+
+    public void setId(int id) {
+        this.id = id;
     }
 
     public int getId() {

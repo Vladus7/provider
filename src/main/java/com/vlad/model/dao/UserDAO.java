@@ -10,23 +10,22 @@ import java.util.List;
 public class UserDAO {
     private Pool dbPool;
 
-    public UserDAO(Pool dbPool){
+    public UserDAO(Pool dbPool) {
         this.dbPool = dbPool;
     }
 
     public void createUser(User user) {
         try {
             Connection connection = dbPool.getConnection();
-            PreparedStatement preparedStatement = connection.prepareStatement("INSERT INTO provider.account (login, password, permissions,language, bill, name, surname, telephone, spent) VALUES (?,?,?,?,?,?,?,?,?)", Statement.RETURN_GENERATED_KEYS);
+            PreparedStatement preparedStatement = connection.prepareStatement("INSERT INTO provider.account (login, password, permissions, bill, name, surname, telephone, spent) VALUES (?,?,?,?,?,?,?,?)", Statement.RETURN_GENERATED_KEYS);
             preparedStatement.setString(1, user.getLogin());
             preparedStatement.setString(2, user.getPassword());
             preparedStatement.setString(3, user.getPermissions());
-            preparedStatement.setString(4, "EN");
-            preparedStatement.setDouble(5, 0);
-            preparedStatement.setString(6, "");
-            preparedStatement.setString(7, "");
-            preparedStatement.setString(8, "");
-            preparedStatement.setDouble(9, 0);
+            preparedStatement.setDouble(4, 0);
+            preparedStatement.setString(5, user.getName());
+            preparedStatement.setString(6, user.getSurname());
+            preparedStatement.setString(7, user.getTelephone());
+            preparedStatement.setDouble(8, 0);
             preparedStatement.execute();
             try (ResultSet keys = preparedStatement.getGeneratedKeys()) {
                 if (keys.next()) {
@@ -39,21 +38,21 @@ public class UserDAO {
             //logger.log(Level.SEVERE, ERROR, e);
         }
     }
-//update
+
+    //update
     public void setUser(User user) {
         try {
             Connection connection = dbPool.getConnection();
-            PreparedStatement preparedStatement = connection.prepareStatement("UPDATE provider.account SET login = ?, password = ?, permissions = ?, language=?, bill = ?, name = ?, surname = ?, telephone = ?, spent = ?  WHERE id = ?");
+            PreparedStatement preparedStatement = connection.prepareStatement("UPDATE provider.account SET login = ?, password = ?, permissions = ?,  bill = ?, name = ?, surname = ?, telephone = ?, spent = ?  WHERE id = ?");
             preparedStatement.setString(1, user.getLogin());
             preparedStatement.setString(2, user.getPassword());
             preparedStatement.setString(3, user.getPermissions());
-            preparedStatement.setString(4, user.getLanguage());
-            preparedStatement.setDouble(5, user.getBill());
-            preparedStatement.setString(6, user.getName());
-            preparedStatement.setString(7, user.getSurname());
-            preparedStatement.setString(8, user.getTelephone());
-            preparedStatement.setDouble(9, user.getSpent());
-            preparedStatement.setInt(10, user.getId());
+            preparedStatement.setDouble(4, user.getBill());
+            preparedStatement.setString(5, user.getName());
+            preparedStatement.setString(6, user.getSurname());
+            preparedStatement.setString(7, user.getTelephone());
+            preparedStatement.setDouble(8, user.getSpent());
+            preparedStatement.setInt(9, user.getId());
             preparedStatement.execute();
             dbPool.putConnection(connection);
         } catch (SQLException e) {
@@ -64,7 +63,8 @@ public class UserDAO {
 
     public User getUser(String login) {
         User user = null;
-        try {Connection connection = dbPool.getConnection();
+        try {
+            Connection connection = dbPool.getConnection();
             PreparedStatement preparedStatement = connection.prepareStatement("SELECT * FROM `provider`.account WHERE login = ?");
             preparedStatement.setString(1, login);
             preparedStatement.execute();
@@ -74,7 +74,6 @@ public class UserDAO {
                         resultSet.getString("login"),
                         resultSet.getString("password"),
                         resultSet.getString("permissions"),
-                        resultSet.getString("language"),
                         resultSet.getDouble("bill"),
                         resultSet.getString("name"),
                         resultSet.getString("surname"),
@@ -84,6 +83,7 @@ public class UserDAO {
             dbPool.putConnection(connection);
         } catch (SQLException e) {
             System.out.println(e);
+
             // logger.log(Level.SEVERE, ERROR, e);
         }
         return user;
@@ -92,7 +92,8 @@ public class UserDAO {
     public List<User> getAllUser() {
         List<User> users = new ArrayList<>();
         User user = null;
-        try {Connection connection = dbPool.getConnection();
+        try {
+            Connection connection = dbPool.getConnection();
             PreparedStatement preparedStatement = connection.prepareStatement("SELECT * FROM `provider`.account");
             preparedStatement.execute();
             ResultSet resultSet = preparedStatement.executeQuery();
@@ -101,7 +102,6 @@ public class UserDAO {
                         resultSet.getString("login"),
                         resultSet.getString("password"),
                         resultSet.getString("permissions"),
-                        resultSet.getString("language"),
                         resultSet.getDouble("bill"),
                         resultSet.getString("name"),
                         resultSet.getString("surname"),
@@ -115,5 +115,24 @@ public class UserDAO {
             // logger.log(Level.SEVERE, ERROR, e);
         }
         return users;
+    }
+
+    public boolean checkEmail(String email) {
+        boolean answer = false;
+        try {
+            Connection connection = dbPool.getConnection();
+            PreparedStatement preparedStatement = connection.prepareStatement("SELECT * FROM `provider`.account WHERE login = ?");
+            preparedStatement.setString(1, email);
+            preparedStatement.execute();
+            ResultSet resultSet = preparedStatement.executeQuery();
+            if (resultSet.next()) {
+                answer = true;
+            }
+            dbPool.putConnection(connection);
+        } catch (SQLException e) {
+            System.out.println(e);
+            // logger.log(Level.SEVERE, ERROR, e);
+        }
+        return answer;
     }
 }

@@ -21,8 +21,8 @@ public class Tariff implements Comparable<Tariff> {
         this.price = price;
     }
 
-    public static Tariff createTariff(String name, String description, double prise, TariffDAO tariffDAO){
-        Tariff tariff = new Tariff(name,description,prise);
+    public static Tariff createTariff(String name, String description, double prise, TariffDAO tariffDAO) {
+        Tariff tariff = new Tariff(name, description, prise);
         tariffDAO.createTariff(tariff);
         return tariff;
     }
@@ -55,7 +55,7 @@ public class Tariff implements Comparable<Tariff> {
         return price;
     }
 
-    public void setPrise(double prise) {
+    public void setPrice(double price) {
         this.price = price;
     }
 

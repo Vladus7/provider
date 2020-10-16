@@ -1,0 +1,49 @@
+body{margin: 0;
+    padding: 0;
+    min-width: 100%}
+
+.header{
+    height: 10%;
+    background-color: #0ca7f9;
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    color: #ffffff;
+    font-size: 45px;
+    font-family: 'Noto Sans JP', sans-serif;
+}
+
+.user{
+    display: flex;
+    flex-direction: row;
+    width: 400px;
+    justify-content: space-around;
+    align-items: center;
+}
+
+.language{
+    display: flex;
+    flex-direction: row;
+    width: 10%;
+    font-size: 25px;
+}
+
+.main{
+    height: 80%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: #0ca7f9;
+    font-size: 100px;
+    font-family: 'Noto Sans JP', sans-serif;
+}
+
+.information{
+    margin-top: 10px;
+    height: 10%;
+    background-color: #0ca7f9;
+    display: flex;
+    align-items: center;
+    color: #ffffff;
+    justify-content: space-around;
+}

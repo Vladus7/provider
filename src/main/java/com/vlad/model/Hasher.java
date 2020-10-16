@@ -5,7 +5,8 @@ import java.security.NoSuchAlgorithmException;
 
 public class Hasher {
 
-    private Hasher(){}
+    private Hasher() {
+    }
 
     public static String getHash(String input, String algorithm) {
         byte[] hash = null;

@@ -7,7 +7,6 @@ public class User {
     private String login;
     private String password;
     private String permissions;
-    private String language;
     private Double bill;
     private String name;
     private String surname;
@@ -17,12 +16,11 @@ public class User {
     public User() {
     }
 
-    public User(int id, String login, String password, String permissions, String language, Double bill, String name, String surname, String telephone, Double spent) {
+    public User(int id, String login, String password, String permissions, Double bill, String name, String surname, String telephone, Double spent) {
         this.id = id;
         this.login = login;
         this.password = password;
         this.permissions = permissions;
-        this.language = language;
         this.bill = bill;
         this.name = name;
         this.surname = surname;
@@ -36,11 +34,30 @@ public class User {
         this.permissions = permissions;
     }
 
-    public static User createUser(String login, String password, String permissions, UserDAO userDAO){
+    public User(String login, String password, Double bill, String name, String surname, String telephone, Double spent, String permissions) {
+        this.login = login;
+        this.password = password;
+        this.bill = bill;
+        this.permissions = permissions;
+        this.name = name;
+        this.surname = surname;
+        this.telephone = telephone;
+        this.spent = spent;
+    }
+
+
+    public static User createUser(String login, String password, String permissions, UserDAO userDAO) {
         User user = new User(login, password, permissions);
         userDAO.createUser(user);
         return user;
     }
+
+    public static User createUser(String login, String password, Double bill, String name, String surname, String telephone, Double spent, String permissions, UserDAO userDAO) {
+        User user = new User(login, password, bill, name, surname, telephone, spent, permissions);
+        userDAO.createUser(user);
+        return user;
+    }
+
 
     public int getId() {
         return id;
@@ -72,14 +89,6 @@ public class User {
 
     public void setPermissions(String rights) {
         this.permissions = permissions;
-    }
-
-    public String getLanguage() {
-        return language;
-    }
-
-    public void setLanguage(String language) {
-        this.language = language;
     }
 
     public Double getBill() {

@@ -34,7 +34,7 @@
                 ${requestScope.errorPassword}</div>
         <div><input class="button" type="submit" value="Login">
         </div>
-        <div class="link"><a href="http://localhost:8080/registerPage">Registration</a></div>
+        <div class="link"><a href="http://localhost:8080/register">Registration</a></div>
     </form>
 </div>
 <div class="information">

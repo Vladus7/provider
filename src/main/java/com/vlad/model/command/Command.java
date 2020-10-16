@@ -1,5 +1,7 @@
 package com.vlad.model.command;
 
+import com.itextpdf.text.DocumentException;
+
 import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;

@@ -8,14 +8,15 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
 public class UnknownCommand implements Command {
+    private final String URL = "/error";
 
     @Override
     public void process(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-
+        request.getRequestDispatcher("./WEB-INF/error/error404.jsp").forward(request, response);
     }
 
     @Override
     public String getUrl() {
-        return null;
+        return URL;
     }
 }

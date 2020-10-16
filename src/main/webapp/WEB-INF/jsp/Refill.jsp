@@ -73,7 +73,8 @@
                     </div>
                 <div class="value">
                     Enter cards expiration date:
-                    <div class="date"><input name="month" class="month">
+                    <div class="date">
+                        <input name="month" class="month">
                         <div class="separator">/</div>
                         <input name="year" class="year">
                 </div>

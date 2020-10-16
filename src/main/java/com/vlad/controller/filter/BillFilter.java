@@ -8,6 +8,7 @@ import javax.servlet.annotation.WebFilter;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import javax.swing.plaf.basic.BasicDesktopIconUI;
 import java.io.IOException;
 
 @WebFilter(urlPatterns = "/service")
@@ -18,11 +19,10 @@ public class BillFilter implements Filter {
         HttpServletRequest httpReq = (HttpServletRequest) servletRequest;
         HttpSession session = httpReq.getSession();
         User user = (User) session.getAttribute("user");
-        if (user!=null){
-            if(user.getBill()==0){
-                user.setBill(0.01);
+        if (user != null) {
+            if (user.getBill() == 0) {
                 HttpServletResponse httpResponse = (HttpServletResponse) servletResponse;
-                httpResponse.sendRedirect("/refillPage");
+                httpResponse.sendRedirect("/refill");
                 return;
             }
 

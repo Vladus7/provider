@@ -18,7 +18,7 @@
     <div><img src="http://localhost:8080/resource/image/smallLogo.png"></div>
     <div>Registration</div>
 </div>
-<form class="loginForm" action="login" method="post">
+<form class="loginForm" action="register" method="post">
     <div class="mainFormRegist">
         <div class="mainValue">
             <div>
@@ -39,24 +39,24 @@
                     <input name="password2" type="password" class="password">
                 </div>
                 <div class="error">
-                    ${requestScope.errorPassword}</div>
+                    ${requestScope.errorPassword2}</div>
             </div>
             <div>
                 <div class="value">
                     Enter your name:
-                    <input name="email" class="email"></div>
+                    <input name="name" class="email"></div>
                 <div class="error">
                     ${requestScope.errorName}
                 </div>
                 <div class="value">
                     Enter surname:
-                    <input name="password" type="password" class="password">
+                    <input name="surname"  class="password">
                 </div>
                 <div class="error">
                     ${requestScope.errorSurname}</div>
                 <div class="value">
                     Enter telephone:
-                    <input name="password2" type="password" class="password">
+                    <input name="telephone" class="password">
                 </div>
                 <div class="error">
                     ${requestScope.errorTelephon}</div>

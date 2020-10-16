@@ -176,6 +176,9 @@ justify-content: center;}
     font-size: 40px;
 }
 
+.amount{
+    color: #0ca7f9;
+}
 
 .top-padding{
     height: 5%;
