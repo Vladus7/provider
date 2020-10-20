@@ -1141,7 +1141,9 @@ APPLICATION_PASSWORD_ADMIN,AUDIT_ADMIN,BACKUP_ADMIN,BINLOG_ADMIN,BINLOG_ENCRYPTI
     <view id="360" parent="2" name="VIEW_TABLE_USAGE">
       <System>1</System>
     </view>
-    <table id="361" parent="6" name="account"/>
+    <table id="361" parent="6" name="account">
+      <Collation>utf8_general_ci</Collation>
+    </table>
     <table id="362" parent="6" name="order"/>
     <table id="363" parent="6" name="service"/>
     <table id="364" parent="6" name="tariff">
@@ -4406,152 +4408,157 @@ APPLICATION_PASSWORD_ADMIN,AUDIT_ADMIN,BACKUP_ADMIN,BINLOG_ADMIN,BINLOG_ENCRYPTI
       <DataType>decimal(10,2 digit)|0s</DataType>
       <NotNull>1</NotNull>
     </column>
-    <key id="1079" parent="361" name="PRIMARY">
+    <column id="1079" parent="361" name="blocking">
+      <Position>10</Position>
+      <DataType>tinyint|0s</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <key id="1080" parent="361" name="PRIMARY">
       <NameSurrogate>1</NameSurrogate>
       <ColNames>id</ColNames>
       <Primary>1</Primary>
     </key>
-    <column id="1080" parent="362" name="id">
+    <column id="1081" parent="362" name="id">
       <Position>1</Position>
       <DataType>int|0s</DataType>
       <NotNull>1</NotNull>
       <SequenceIdentity>null</SequenceIdentity>
     </column>
-    <column id="1081" parent="362" name="user_id">
+    <column id="1082" parent="362" name="user_id">
       <Position>2</Position>
       <DataType>int|0s</DataType>
       <NotNull>1</NotNull>
     </column>
-    <column id="1082" parent="362" name="tariff_id">
+    <column id="1083" parent="362" name="tariff_id">
       <Position>3</Position>
       <DataType>int|0s</DataType>
       <NotNull>1</NotNull>
     </column>
-    <column id="1083" parent="362" name="start_support">
+    <column id="1084" parent="362" name="start_support">
       <Position>4</Position>
       <DataType>date|0s</DataType>
       <NotNull>1</NotNull>
     </column>
-    <column id="1084" parent="362" name="end_support">
+    <column id="1085" parent="362" name="end_support">
       <Position>5</Position>
       <DataType>date|0s</DataType>
       <NotNull>1</NotNull>
     </column>
-    <index id="1085" parent="362" name="account_idx">
+    <index id="1086" parent="362" name="account_idx">
       <ColNames>user_id</ColNames>
       <Type>btree</Type>
     </index>
-    <index id="1086" parent="362" name="tariff_idx">
+    <index id="1087" parent="362" name="tariff_idx">
       <ColNames>tariff_id</ColNames>
       <Type>btree</Type>
     </index>
-    <key id="1087" parent="362" name="PRIMARY">
+    <key id="1088" parent="362" name="PRIMARY">
       <NameSurrogate>1</NameSurrogate>
       <ColNames>id</ColNames>
       <Primary>1</Primary>
     </key>
-    <foreign-key id="1088" parent="362" name="account">
+    <foreign-key id="1089" parent="362" name="account">
       <ColNames>user_id</ColNames>
       <RefTableName>account</RefTableName>
       <RefColNames>id</RefColNames>
       <OnUpdate>cascade</OnUpdate>
       <OnDelete>cascade</OnDelete>
     </foreign-key>
-    <foreign-key id="1089" parent="362" name="order_ibfk_1">
+    <foreign-key id="1090" parent="362" name="order_ibfk_1">
       <ColNames>tariff_id</ColNames>
       <RefTableName>tariff</RefTableName>
       <RefColNames>id</RefColNames>
       <OnUpdate>cascade</OnUpdate>
       <OnDelete>cascade</OnDelete>
     </foreign-key>
-    <column id="1090" parent="363" name="id">
+    <column id="1091" parent="363" name="id">
       <Position>1</Position>
       <DataType>int|0s</DataType>
       <NotNull>1</NotNull>
       <SequenceIdentity>null</SequenceIdentity>
     </column>
-    <column id="1091" parent="363" name="service_name">
+    <column id="1092" parent="363" name="service_name">
       <Position>2</Position>
       <DataType>varchar(45)|0s</DataType>
       <NotNull>1</NotNull>
     </column>
-    <column id="1092" parent="363" name="image">
+    <column id="1093" parent="363" name="image">
       <Position>3</Position>
       <DataType>varchar(200)|0s</DataType>
       <NotNull>1</NotNull>
     </column>
-    <column id="1093" parent="363" name="description">
+    <column id="1094" parent="363" name="description">
       <Position>4</Position>
       <DataType>varchar(300)|0s</DataType>
     </column>
-    <key id="1094" parent="363" name="PRIMARY">
+    <key id="1095" parent="363" name="PRIMARY">
       <NameSurrogate>1</NameSurrogate>
       <ColNames>id</ColNames>
       <Primary>1</Primary>
     </key>
-    <column id="1095" parent="364" name="id">
+    <column id="1096" parent="364" name="id">
       <Position>1</Position>
       <DataType>int|0s</DataType>
       <NotNull>1</NotNull>
       <SequenceIdentity>null</SequenceIdentity>
     </column>
-    <column id="1096" parent="364" name="tariff_name">
+    <column id="1097" parent="364" name="tariff_name">
       <Position>2</Position>
       <DataType>varchar(45)|0s</DataType>
       <NotNull>1</NotNull>
     </column>
-    <column id="1097" parent="364" name="description">
+    <column id="1098" parent="364" name="description">
       <Position>3</Position>
       <DataType>varchar(400)|0s</DataType>
       <NotNull>1</NotNull>
     </column>
-    <column id="1098" parent="364" name="price">
+    <column id="1099" parent="364" name="price">
       <Position>4</Position>
       <DataType>decimal(10,2 digit)|0s</DataType>
       <NotNull>1</NotNull>
     </column>
-    <key id="1099" parent="364" name="PRIMARY">
+    <key id="1100" parent="364" name="PRIMARY">
       <NameSurrogate>1</NameSurrogate>
       <ColNames>id</ColNames>
       <Primary>1</Primary>
     </key>
-    <column id="1100" parent="365" name="id">
+    <column id="1101" parent="365" name="id">
       <Position>1</Position>
       <DataType>int|0s</DataType>
       <NotNull>1</NotNull>
       <SequenceIdentity>null</SequenceIdentity>
     </column>
-    <column id="1101" parent="365" name="tariff_id">
+    <column id="1102" parent="365" name="tariff_id">
       <Position>2</Position>
       <DataType>int|0s</DataType>
       <NotNull>1</NotNull>
     </column>
-    <column id="1102" parent="365" name="service_id">
+    <column id="1103" parent="365" name="service_id">
       <Position>3</Position>
       <DataType>int|0s</DataType>
       <NotNull>1</NotNull>
     </column>
-    <index id="1103" parent="365" name="tariff_idx">
+    <index id="1104" parent="365" name="tariff_idx">
       <ColNames>tariff_id</ColNames>
       <Type>btree</Type>
     </index>
-    <index id="1104" parent="365" name="service_idx">
+    <index id="1105" parent="365" name="service_idx">
       <ColNames>service_id</ColNames>
       <Type>btree</Type>
     </index>
-    <key id="1105" parent="365" name="PRIMARY">
+    <key id="1106" parent="365" name="PRIMARY">
       <NameSurrogate>1</NameSurrogate>
       <ColNames>id</ColNames>
       <Primary>1</Primary>
     </key>
-    <foreign-key id="1106" parent="365" name="tariff">
+    <foreign-key id="1107" parent="365" name="tariff">
       <ColNames>tariff_id</ColNames>
       <RefTableName>tariff</RefTableName>
       <RefColNames>id</RefColNames>
       <OnUpdate>cascade</OnUpdate>
       <OnDelete>cascade</OnDelete>
     </foreign-key>
-    <foreign-key id="1107" parent="365" name="service">
+    <foreign-key id="1108" parent="365" name="service">
       <ColNames>service_id</ColNames>
       <RefTableName>service</RefTableName>
       <RefColNames>id</RefColNames>

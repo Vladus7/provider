@@ -243,6 +243,17 @@ button{
     flex-direction: column;
 }
 
+.message{
+    padding-top: 400px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+    width: 100%;
+    color: #0ca7f9;
+    font-size: 40px;
+}
+
 .icon{margin-left: 30px;
 margin-top: 20px;
 margin-bottom: 20px;}

@@ -8,6 +8,12 @@ public class Hasher {
     private Hasher() {
     }
 
+    /**
+     *
+     * @param input, algorithm
+     *           hashing input.
+     * @return hash.
+     */
     public static String getHash(String input, String algorithm) {
         byte[] hash = null;
         StringBuilder sb = new StringBuilder();

@@ -48,11 +48,16 @@ padding: 0;}
     font-family: 'Noto Sans JP', sans-serif;
 }
 
+.language a{
+    color: white;
+}
+
 .language{
     display: flex;
     flex-direction: row;
     width: 10%;
     font-size: 25px;
+    color: white;
 }
 
 .user{

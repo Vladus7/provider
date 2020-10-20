@@ -1,9 +1,11 @@
 package com.vlad.model.command;
 
-import com.vlad.model.Hasher;
+import com.vlad.model.AppException;
 import com.vlad.model.dao.ServiceDAO;
+import com.vlad.model.dao.UserDAO;
 import com.vlad.model.dao.entity.Service;
-import com.vlad.model.dao.entity.User;
+import com.vlad.model.Localizer;
+import org.apache.log4j.Logger;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
@@ -13,50 +15,61 @@ import java.io.IOException;
 public class CreateServiceCommand implements Command {
     private final String URL = "/create_service";
     private ServiceDAO serviceDAO;
+    private final static Logger logger = Logger.getLogger(CreateServiceCommand.class);
+    private final String IMAGE_REGEX = "^(http:\\/\\/\\.|https:\\/\\/www\\.|http:\\/\\/|https:\\/\\/)?[a-z0-9]+([\\-\\.]{1}[a-z0-9]+)*[a-z]{2,5}(:[0-9]{1,5})?(\\/.*)?$";
+    private final String DESCRIPTION_REGEX = ".{4,45}";
+    private final String CREATE_SERVICE_JSP_PATH = "./WEB-INF/jsp/CreateService.jsp";
 
     public CreateServiceCommand(ServiceDAO serviceDAO) {
         this.serviceDAO = serviceDAO;
     }
 
     @Override
-    public void process(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+    public void process(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException, AppException {
+
         if ("GET".equals(request.getMethod())) {
-            request.getRequestDispatcher("./WEB-INF/jsp/CreateService.jsp").forward(request, response);
+            request.getRequestDispatcher(CREATE_SERVICE_JSP_PATH).forward(request, response);
         }
+
         String image = request.getParameter("image");
         String serviceName = request.getParameter("serviceName");
         String description = request.getParameter("description");
+
         if (image.isEmpty()) {
-            request.setAttribute("imageError", "Image URL is empty");
-            request.getRequestDispatcher("./WEB-INF/jsp/CreateService.jsp").forward(request, response);
+            request.setAttribute("imageError", Localizer.getProper(request, "createService.ImageUREempty "));
+            request.getRequestDispatcher(CREATE_SERVICE_JSP_PATH).forward(request, response);
             return;
         }
         if (serviceName.isEmpty()) {
-            request.setAttribute("serviceNameError", "Service name is empty");
-            request.getRequestDispatcher("./WEB-INF/jsp/CreateService.jsp").forward(request, response);
+            request.setAttribute("serviceNameError", Localizer.getProper(request, "createService.ServiceNameEmpty"));
+            request.getRequestDispatcher(CREATE_SERVICE_JSP_PATH).forward(request, response);
             return;
         }
-        if (!image.matches("^(http:\\/\\/\\.|https:\\/\\/www\\.|http:\\/\\/|https:\\/\\/)?[a-z0-9]+([\\-\\.]{1}[a-z0-9]+)*[a-z]{2,5}(:[0-9]{1,5})?(\\/.*)?$")) {
-            request.setAttribute("imageError", "Image is incorrect");
-            request.getRequestDispatcher("./WEB-INF/jsp/CreateService.jsp").forward(request, response);
+        if (!image.matches(IMAGE_REGEX)) {
+            request.setAttribute("imageError", Localizer.getProper(request, "createService.ImageIncorrect"));
+            request.getRequestDispatcher(CREATE_SERVICE_JSP_PATH ).forward(request, response);
             return;
         }
-        if (!serviceName.matches(".{4,45}")) {
-            request.setAttribute("serviceNameError", "Service name is incorrect");
-            request.getRequestDispatcher("./WEB-INF/jsp/CreateService.jsp").forward(request, response);
+        if (!serviceName.matches(DESCRIPTION_REGEX)) {
+            request.setAttribute("serviceNameError", Localizer.getProper(request, "createService.ServiceNameIncorrec"));
+            request.getRequestDispatcher(CREATE_SERVICE_JSP_PATH ).forward(request, response);
             return;
         }
         if (!description.isEmpty()) {
             if (description.length() > 400) {
-                request.setAttribute("descriptionError", "Description is incorrect");
-                request.getRequestDispatcher("./WEB-INF/jsp/CreateService.jsp").forward(request, response);
+                request.setAttribute("descriptionError", Localizer.getProper(request, "createService.DescriptionIncorrect"));
+                request.getRequestDispatcher(CREATE_SERVICE_JSP_PATH ).forward(request, response);
                 return;
             }
         }
+        logger.info("Create service"+ serviceName);
         Service.createService(serviceName, image, description, serviceDAO);
-        response.sendRedirect("http://localhost:8080/service");
+        response.sendRedirect("/service");
     }
 
+    /**
+     * @return Name of the command.
+     */
     @Override
     public String getUrl() {
         return URL;

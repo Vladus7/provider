@@ -8,12 +8,16 @@ import javax.servlet.annotation.WebFilter;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
-import javax.swing.plaf.basic.BasicDesktopIconUI;
 import java.io.IOException;
 
 @WebFilter(urlPatterns = "/service")
 public class BillFilter implements Filter {
 
+    /**
+     * filter user bill
+     *
+     * redirect on refill page
+     */
     @Override
     public void doFilter(ServletRequest servletRequest, ServletResponse servletResponse, FilterChain filterChain) throws IOException, ServletException {
         HttpServletRequest httpReq = (HttpServletRequest) servletRequest;

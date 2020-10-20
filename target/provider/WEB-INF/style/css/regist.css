@@ -14,6 +14,18 @@ body{
     font-family: 'Noto Sans JP', sans-serif;
 }
 
+.language{
+    display: flex;
+    flex-direction: row;
+    width: 10%;
+    font-size: 25px;
+}
+
+.language a{
+    text-decoration: none;
+    color: white;
+}
+
 .value{
     color: #0ca7f9;
 }

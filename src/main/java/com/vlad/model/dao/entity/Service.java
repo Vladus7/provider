@@ -1,5 +1,6 @@
 package com.vlad.model.dao.entity;
 
+import com.vlad.model.AppException;
 import com.vlad.model.dao.ServiceDAO;
 
 public class Service {
@@ -21,7 +22,7 @@ public class Service {
         this.description = description;
     }
 
-    public static Service createService(String name, String image, String description, ServiceDAO serviceDAO) {
+    public static Service createService(String name, String image, String description, ServiceDAO serviceDAO) throws AppException {
         Service service = new Service(name, image, description);
         serviceDAO.createService(service);
         return service;

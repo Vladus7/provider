@@ -6,73 +6,43 @@
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" isELIgnored="false"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+
+<fmt:setLocale value="${cookie['lang'].value}"/>
+<fmt:setBundle basename="messages"/>
 <html>
 <head>
     <title>Title</title>
-    <link rel="stylesheet" href="http://localhost:8080/resource/css/refill.css">
+    <link rel="stylesheet" href="/resource/css/refill.css">
 </head>
 <body>
 <div class="header">
-    <div>Refill you account</div>
+    <div><fmt:message key="refill.RefillAccount"/></div>
 </div>
-<%--<div>Refill you account</div>--%>
-<%--<div class="cardBox">--%>
-<%--    <div class="line"></div>--%>
-<%--    <div class="input">--%>
-<%--        <div class="submitDiv>">--%>
-<%--            <div class="value">--%>
-<%--                Enter the amount to replenish:--%>
-<%--                <input name="amount" type="amount">--%>
-<%--            </div>--%>
-<%--            <div><input class="button" type="submit" value="Replenish">--%>
-<%--            </div>--%>
-<%--        </div>--%>
-<%--        <div class="card">--%>
-<%--            <form class="refillForm" action="refill" method="post">--%>
-<%--                <div class="value">--%>
-<%--                    Enter your card:--%>
-<%--                    <input name="cardName" class="cardName"></div>--%>
-<%--                &lt;%&ndash;    <div class="error">&ndash;%&gt;--%>
-<%--                &lt;%&ndash;        ${requestScope.errorLogin}&ndash;%&gt;--%>
-<%--                &lt;%&ndash;    </div>&ndash;%&gt;--%>
-<%--                <div class="value">--%>
-<%--                    Enter cards expiration date:--%>
-<%--                    <input name="date" type="date">--%>
-<%--                </div>--%>
-<%--                &lt;%&ndash;    <div class="error">&ndash;%&gt;--%>
-<%--                &lt;%&ndash;        ${requestScope.errorPassword}</div>&ndash;%&gt;--%>
-<%--                <div class="value">--%>
-<%--                    Enter cards CVC:--%>
-<%--                    <input name="cvc" type="cvc">--%>
-<%--                </div>--%>
-<%--            </form>--%>
-<%--        </div>--%>
-<%--    </div>--%>
-<%--</div>--%>
 <div class="main">
     <form class="refillForm" action="refill" method="post">
         <div class="line-wrapper">
             <div class="line"></div>
             <div class="submitDiv>">
                 <div class="value-submitDiv">
-                    Enter the amount to replenish:
+                    <fmt:message key="refill.EnterAmountReplenish"/>
                     <input name="amount" class="amount">
                     <div class="error">
                         ${requestScope.errorAmount}</div>
                 </div>
-                <div><input class="button" type="submit" value="Replenish">
+                <div><input class="button" type="submit" value="<fmt:message key="refill.Replenish"/>">
                 </div>
             </div>
             <div class="card">
                 <div class="top-padding"></div>
                 <div class="value" >
-                    Enter your card:
+                    <fmt:message key="refill.EnterCard"/>
                     <input name="cardName" class="cardName"></div>
                     <div class="error">
                         ${requestScope.errorCardName}
                     </div>
                 <div class="value">
-                    Enter cards expiration date:
+                    <fmt:message key="refill.EnterCardsExpirationDate"/>
                     <div class="date">
                         <input name="month" class="month">
                         <div class="separator">/</div>
@@ -81,7 +51,7 @@
                     <div class="error">
                         ${requestScope.errorDate}</div></div>
                 <div class="value">
-                    Enter cards CVC:
+                    <fmt:message key="refill.EnterCardsCVC"/>
                     <input name="cvc" class="cvc">
                     <div class="error">
                         ${requestScope.errorCVC}</div>

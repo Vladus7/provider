@@ -13,24 +13,32 @@ import javax.servlet.ServletContextListener;
 import java.util.HashMap;
 import java.util.Map;
 
+/**
+ * Initialization (pool, dao, controller commands).
+ *
+ * @author V.But
+ */
 public class MainListener implements ServletContextListener {
     @Override
     public void contextDestroyed(ServletContextEvent arg0) {
         System.out.println("ServletContextListener destroyed");
     }
 
-    //Run this before web application is started
+    //Run before web application is started
     @Override
     public void contextInitialized(ServletContextEvent arg0) {
         Map<String, Command> commandHashMap = new HashMap<>();
 
+        //pool
         Pool pool = new DBPool("jdbc:mysql://localhost:3306/provider?verifyServerCertificate=false&characterEncoding=UTF-8&allowPublicKeyRetrieval=true&useSSL=false&requireSSL=false&useLegacyDatetimeCode=false&amp&serverTimezone=UTC&user=vlad&password=vlad", 5);
 
+        //dao
         ServiceDAO serviceDAO = new ServiceDAO(pool);
         TariffDAO tariffDAO = new TariffDAO(pool);
         UserDAO userDAO = new UserDAO(pool);
         OrderDAO orderDAO = new OrderDAO(pool);
 
+        //command
         Command loginCommand = new LoginCommand(userDAO);
         Command tariffCommand = new TariffCommand(tariffDAO);
         Command resource = new ResourceCommand();
@@ -38,7 +46,7 @@ public class MainListener implements ServletContextListener {
         Command service = new ServiceCommand(serviceDAO);
         Command accountCommand = new AccountCommand(tariffDAO, userDAO);
         Command registerCommand = new RegisterCommand(userDAO);
-        Command dounloadCommad = new DounloadCommad();
+        Command downloadCommand = new DownloadCommand(userDAO, tariffDAO);
         Command buyCommand = new BuyCommand(tariffDAO, orderDAO);
         Command deleteServiceCommand = new DeleteServiceCommand(serviceDAO);
         Command deleteTariffCommand = new DeleteTariffCommand(tariffDAO);
@@ -47,15 +55,22 @@ public class MainListener implements ServletContextListener {
         Command createTariffCommand = new CreateTariffCommand(tariffDAO);
         Command changeTariffCommand = new ChangeTariffCommand(tariffDAO);
         Command createAccountCommand = new CreateAccountCommand(userDAO);
+        Command accountListCommand = new AccountListCommand(userDAO);
+        Command bannedCommand = new BannedCommand(userDAO);
+        Command logoutCommand = new LogoutCommand();
 
+        //put command in hashMap
+        commandHashMap.put(logoutCommand.getUrl(), logoutCommand);
+        commandHashMap.put(bannedCommand.getUrl(), bannedCommand);
         commandHashMap.put(createAccountCommand.getUrl(), createAccountCommand);
+        commandHashMap.put(accountListCommand.getUrl(), accountListCommand);
         commandHashMap.put(changeTariffCommand.getUrl(), changeTariffCommand);
         commandHashMap.put(createTariffCommand.getUrl(), createTariffCommand);
         commandHashMap.put(changeServiceCommand.getUrl(), changeServiceCommand);
         commandHashMap.put(createServiceCommand.getUrl(), createServiceCommand);
         commandHashMap.put(deleteTariffCommand.getUrl(), deleteTariffCommand);
         commandHashMap.put(deleteServiceCommand.getUrl(), deleteServiceCommand);
-        commandHashMap.put(dounloadCommad.getUrl(), dounloadCommad);
+        commandHashMap.put(downloadCommand.getUrl(), downloadCommand);
         commandHashMap.put(buyCommand.getUrl(), buyCommand);
         commandHashMap.put(resource.getUrl(), resource);
         commandHashMap.put(loginCommand.getUrl(), loginCommand);
@@ -67,6 +82,4 @@ public class MainListener implements ServletContextListener {
 
         arg0.getServletContext().setAttribute("commandHashMap", commandHashMap);
     }
-
-
 }

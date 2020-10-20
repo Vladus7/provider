@@ -7,11 +7,25 @@ body{
     padding-left: 10%;
     height: 10%;
     background-color: #0ca7f9;
+    justify-content: space-between;
     display: flex;
     align-items: center;
     color: #ffffff;
     font-size: 45px;
+    text-decoration: none;
     font-family: 'Noto Sans JP', sans-serif;
+}
+
+.language{
+    display: flex;
+    flex-direction: row;
+    width: 10%;
+    font-size: 25px;
+}
+
+.language a{
+    text-decoration: none;
+    color: white;
 }
 
 .mainForm{

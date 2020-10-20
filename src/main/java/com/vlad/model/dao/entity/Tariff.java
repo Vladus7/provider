@@ -1,5 +1,6 @@
 package com.vlad.model.dao.entity;
 
+import com.vlad.model.AppException;
 import com.vlad.model.dao.TariffDAO;
 
 public class Tariff implements Comparable<Tariff> {
@@ -21,7 +22,7 @@ public class Tariff implements Comparable<Tariff> {
         this.price = price;
     }
 
-    public static Tariff createTariff(String name, String description, double prise, TariffDAO tariffDAO) {
+    public static Tariff createTariff(String name, String description, double prise, TariffDAO tariffDAO) throws AppException {
         Tariff tariff = new Tariff(name, description, prise);
         tariffDAO.createTariff(tariff);
         return tariff;

@@ -8,7 +8,9 @@ import java.sql.DriverManager;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
-
+/**
+ * DBPool.
+ */
 public class DBPool implements Pool {
     private String url;
     private List<Connection> connections = new ArrayList<>();
@@ -37,6 +39,9 @@ public class DBPool implements Pool {
         return conn;
     }
 
+    /**
+     * @return connection.
+     */
     public synchronized Connection getConnection() {
         Connection newConn;
         if (connections.size() == 0) {
@@ -49,6 +54,11 @@ public class DBPool implements Pool {
         return newConn;
     }
 
+    /**
+     * Returns connection into pool
+     *
+     * @param c
+     */
     public synchronized void putConnection(Connection c) throws SQLException {
         if (c != null) {
             if (usedConnections.remove(c)) {

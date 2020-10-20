@@ -13,11 +13,18 @@ import java.io.*;
 import java.nio.Buffer;
 import java.nio.file.Files;
 import java.nio.file.Paths;
+import java.sql.SQLException;
 import java.util.Arrays;
 
 
 public enum FileManager {
-
+    /**
+     * Send file.
+     *
+     * @param path, fileName, response
+     *            send file to client.
+     * @throws IOException
+     */
     CSS {
         @Override
         public void execute(String path, String fileName, HttpServletResponse response) throws IOException {

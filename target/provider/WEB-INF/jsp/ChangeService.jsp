@@ -14,47 +14,51 @@
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" isELIgnored="false" %>
 <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+
+<fmt:setLocale value="${cookie['lang'].value}"/>
+<fmt:setBundle basename="messages"/>
 <html>
 <head>
-    <title>Title</title>
-    <link rel="stylesheet" href="http://localhost:8080/resource/css/CreateService.css">
+    <title>Wolf Provider</title>
+    <link rel="stylesheet" href="/resource/css/CreateService.css">
 </head>
 <body>
 <div class="header">
-    <div><a href="http://localhost:8080/service"><img src="http://localhost:8080/resource/image/smallLogo.png"></a></div>
-    <div>Change service</div>
+    <div><a href="/service"><img src="/resource/image/smallLogo.png"></a></div>
+    <div><fmt:message key="changeService.ChangeService" /></div>
     <div class="user">
         <div class="language">
             <a>EN</a>
             <div class="separator">/</div>
             <a>RU</a>
         </div>
-        <div><a href="http://localhost:8080/account"><img src="http://localhost:8080/resource/image/person_img.png"></a></div>
+        <div><a href="/account"><img src="/resource/image/person_img.png"></a></div>
     </div>
 </div>
 <form class="loginForm" action="change_service" method="post">
     <div class="mainValue">
         <div>
             <div class="value">
-                Enter image URL:
+                <fmt:message key="changeService.EnterImageURL" />
                 <input name="image" class="input" value="${sessionScope.service.image}"></div>
             <div class="error">
                 ${requestScope.imageError}
             </div>
             <div class="value">
-                Enter service name:
+                <fmt:message key="changeService.EnterName" />
                 <input name="serviceName"  class="input" value="${sessionScope.service.name}">
             </div>
             <div class="error">
                 ${requestScope.serviceNameError}</div>
             <div class="value">
-                Enter description:
+                <fmt:message key="changeService.EnterDescription" />
                 <textarea name="description" class="input-textarea" cols="25" rows="8" >${sessionScope.service.description}</textarea>
             </div>
             <div class="error">
                 ${requestScope.descriptionError}</div>
         </div>
-        <div class="button"><input class="button" type="submit" value="Change">
+        <div class="button"><input class="button" type="submit" value="<fmt:message key="changeService.Change" />">
         </div>
     </div>
 </form>

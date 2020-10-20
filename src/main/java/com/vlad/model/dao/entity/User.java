@@ -1,5 +1,6 @@
 package com.vlad.model.dao.entity;
 
+import com.vlad.model.AppException;
 import com.vlad.model.dao.UserDAO;
 
 public class User {
@@ -12,11 +13,12 @@ public class User {
     private String surname;
     private String telephone;
     private Double spent;
+    private boolean blocking;
 
     public User() {
     }
 
-    public User(int id, String login, String password, String permissions, Double bill, String name, String surname, String telephone, Double spent) {
+    public User(int id, String login, String password, String permissions, Double bill, String name, String surname, String telephone, Double spent, boolean blocking) {
         this.id = id;
         this.login = login;
         this.password = password;
@@ -26,6 +28,7 @@ public class User {
         this.surname = surname;
         this.telephone = telephone;
         this.spent = spent;
+        this.blocking = blocking;
     }
 
     public User(String login, String password, String permissions) {
@@ -34,7 +37,7 @@ public class User {
         this.permissions = permissions;
     }
 
-    public User(String login, String password, Double bill, String name, String surname, String telephone, Double spent, String permissions) {
+    public User(String login, String password, Double bill, String name, String surname, String telephone, Double spent, String permissions, boolean blocking) {
         this.login = login;
         this.password = password;
         this.bill = bill;
@@ -43,17 +46,18 @@ public class User {
         this.surname = surname;
         this.telephone = telephone;
         this.spent = spent;
+        this.blocking = blocking;
     }
 
 
-    public static User createUser(String login, String password, String permissions, UserDAO userDAO) {
+    public static User createUser(String login, String password, String permissions, UserDAO userDAO) throws AppException {
         User user = new User(login, password, permissions);
         userDAO.createUser(user);
         return user;
     }
 
-    public static User createUser(String login, String password, Double bill, String name, String surname, String telephone, Double spent, String permissions, UserDAO userDAO) {
-        User user = new User(login, password, bill, name, surname, telephone, spent, permissions);
+    public static User createUser(String login, String password, Double bill, String name, String surname, String telephone, Double spent, String permissions, boolean blocking, UserDAO userDAO) throws AppException {
+        User user = new User(login, password, bill, name, surname, telephone, spent, permissions, blocking);
         userDAO.createUser(user);
         return user;
     }
@@ -129,5 +133,13 @@ public class User {
 
     public void setSpent(Double spent) {
         this.spent = spent;
+    }
+
+    public boolean isBlocking() {
+        return blocking;
+    }
+
+    public void setBlocking(boolean blocking) {
+        this.blocking = blocking;
     }
 }

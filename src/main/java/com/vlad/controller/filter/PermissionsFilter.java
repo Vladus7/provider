@@ -9,22 +9,24 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
 
-//@WebFilter({"/service","/tariff"})
+@WebFilter({"/delete_tariff","/delete_service","/create_tariff", "/create_service","/create_account","/change_tariff","/change_service","/banned","/accountList"})
 public class PermissionsFilter implements Filter {
+    /**
+     * filter user permission
+     *
+     * redirect on login page
+     */
     @Override
     public void doFilter(ServletRequest servletRequest, ServletResponse servletResponse, FilterChain filterChain) throws IOException, ServletException {
-//        HttpServletRequest httpReq = (HttpServletRequest) servletRequest;
-//        HttpSession session = httpReq.getSession();
-//        User user = (User) session.getAttribute("user");
-//        if (user!=null){
-//            if(user.getBill()==0){
-//                HttpServletResponse httpResponse = (HttpServletResponse) servletResponse;
-//                httpResponse.sendRedirect("/refill");
-//                return;
-//            }
-//
-//        }
-//        filterChain.doFilter(servletRequest, servletResponse);
-        System.out.println("<====================>");
+        HttpServletRequest httpReq = (HttpServletRequest) servletRequest;
+        HttpSession session = httpReq.getSession();
+        User user = (User) session.getAttribute("user");
+        if ("user".equals(user.getPermissions())){
+                HttpServletResponse httpResponse = (HttpServletResponse) servletResponse;
+                session.invalidate();
+                httpResponse.sendRedirect("/login");
+                return;
+        }
+        filterChain.doFilter(servletRequest, servletResponse);
     }
 }

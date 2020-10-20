@@ -7,47 +7,51 @@
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" isELIgnored="false" %>
 <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+
+<fmt:setLocale value="${cookie['lang'].value}"/>
+<fmt:setBundle basename="messages"/>
 <html>
 <head>
     <title>Title</title>
-    <link rel="stylesheet" href="http://localhost:8080/resource/css/CreateService.css">
+    <link rel="stylesheet" href="/resource/css/CreateService.css">
 </head>
 <body>
 <div class="header">
-    <div><a href="http://localhost:8080/service"><img src="http://localhost:8080/resource/image/smallLogo.png"></a></div>
-    <div>Create service</div>
+    <div><a href="/service"><img src="/resource/image/smallLogo.png"></a></div>
+    <div><fmt:message key="createTariff.CreateTariff"/></div>
     <div class="user">
         <div class="language">
             <a>EN</a>
             <div class="separator">/</div>
             <a>RU</a>
         </div>
-        <div><a href="http://localhost:8080/account"><img src="http://localhost:8080/resource/image/person_img.png"></a></div>
+        <div><a href="/account"><img src="/resource/image/person_img.png"></a></div>
     </div>
 </div>
 <form class="loginForm" action="create_tariff" method="post">
     <div class="mainValue">
         <div>
             <div class="value">
-                Enter tariff name:
+                <fmt:message key="createTariff.EnterTariffName"/>
                 <input name="tariffName" class="input"></div>
             <div class="error">
                 ${requestScope.ErrorName}
             </div>
             <div class="value">
-                Enter description:
+                <fmt:message key="createTariff.EnterDescription"/>
                 <textarea name="description" class="input-textarea" cols="25" rows="8"></textarea>
             </div>
             <div class="error">
                 ${requestScope.descriptionError}</div>
             <div class="value">
-                Enter price:
+                <fmt:message key="createTariff.EnterPrice"/>
                 <input name="price"  class="input">
             </div>
             <div class="error">
                 ${requestScope.priceError}</div>
         </div>
-        <div class="button"><input class="button" type="submit" value="Create">
+        <div class="button"><input class="button" type="submit" value="<fmt:message key="createTariff.Create"/>">
         </div>
     </div>
 </form>

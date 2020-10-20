@@ -32,19 +32,7 @@
             <td>${service.description}</td>
         </tr>
     </c:forEach>
-<%--    <c:forEach items="${tariffs}" var="tariff">--%>
-<%--        <tr>--%>
-<%--            <td>${tariff.id}</td>--%>
-<%--            <td>${tariff.name}</td>--%>
-<%--            <td>${tariff.description}</td>--%>
-<%--        </tr>--%>
-<%--    </c:forEach>--%>
     </tbody>
 </table>
 </body>
 </html>
-<%--<html>--%>
-<%--<body>--%>
-<%--<h2>Hello World!</h2>--%>
-<%--</body>--%>
-<%--</html>--%>
