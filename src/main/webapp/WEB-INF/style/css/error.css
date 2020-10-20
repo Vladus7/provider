@@ -1,0 +1,22 @@
+body{
+    margin: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.page{
+    display: flex;
+    flex-direction: column;
+}
+
+.error-code{
+    padding-left: 20px;
+    font-size: 100px;
+    color: #0ca7f9;
+}
+
+.error-inf{
+    font-size: 50px;
+    color: #0ca7f9;
+}

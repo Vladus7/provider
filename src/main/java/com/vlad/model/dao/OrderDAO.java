@@ -8,7 +8,9 @@ import com.vlad.model.pool.Pool;
 import org.apache.log4j.Logger;
 
 import java.sql.*;
+import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.List;
 
 public class OrderDAO {
     private Pool dbPool;
@@ -146,5 +148,35 @@ public class OrderDAO {
         cal.setTime(date);
         cal.add(Calendar.MONTH, 1);
         return new Date(cal.getTimeInMillis());
+    }
+
+
+private final String SELECT_USER_ORDERS = "SELECT * FROM `provider`.order WHERE  user_id = ? ";
+    public List<Order> getAllUserOrders(String id) throws AppException {
+        List<Order> orders = new ArrayList<>();
+        Order order = null;
+        logger.info("Check order bu user "+id);
+        try {
+            Connection connection = dbPool.getConnection();
+            PreparedStatement preparedStatement = connection.prepareStatement(SELECT_USER_ORDERS);
+            preparedStatement.setString(1, id);
+            preparedStatement.execute();
+            try (ResultSet resultSet = preparedStatement.executeQuery()) {
+                while (resultSet.next()) {
+                    order = new Order(resultSet.getInt("id"),
+                            resultSet.getInt("user_id"),
+                            resultSet.getInt("tariff_id"),
+                            resultSet.getDate("start_support"),
+                            resultSet.getDate("end_support"));
+                    orders.add(order);
+                }
+            }
+            preparedStatement.close();
+            dbPool.putConnection(connection);
+        } catch (SQLException e) {
+            logger.error(ERROR + e);
+            throw new AppException("Can't found tariffs", EXCEPTION_CODE, e.getMessage());
+        }
+        return orders;
     }
 }

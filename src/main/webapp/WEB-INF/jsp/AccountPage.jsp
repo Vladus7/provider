@@ -79,6 +79,9 @@
                 <div class="buttonRegist"><input class="button" type="submit" value="<fmt:message key="accountPage.SaveChanges"/>">
                 </div>
                 </form>
+                <div class="button">
+                <a href="/download?elem=tariffs_user">Download you tariffs</a>
+                </div>
             </div>
         </div>
     </div>

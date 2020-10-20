@@ -60,7 +60,7 @@ public class CreateAccountCommand implements Command {
             return;
         }
         if (userDAO.checkEmail(email)) {
-            request.setAttribute("errorLogin", Localizer.getProper(request, "register.EmailUsed "));
+            request.setAttribute("errorLogin", Localizer.getProper(request, "register.EmailUsed"));
             request.getRequestDispatcher(PATH_CREATE_ACCOUNT_JSP).forward(request, response);
             return;
         }

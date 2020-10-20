@@ -46,7 +46,7 @@ public class MainListener implements ServletContextListener {
         Command service = new ServiceCommand(serviceDAO);
         Command accountCommand = new AccountCommand(tariffDAO, userDAO);
         Command registerCommand = new RegisterCommand(userDAO);
-        Command downloadCommand = new DownloadCommand(userDAO, tariffDAO);
+        Command downloadCommand = new DownloadCommand(userDAO, tariffDAO, orderDAO);
         Command buyCommand = new BuyCommand(tariffDAO, orderDAO);
         Command deleteServiceCommand = new DeleteServiceCommand(serviceDAO);
         Command deleteTariffCommand = new DeleteTariffCommand(tariffDAO);
